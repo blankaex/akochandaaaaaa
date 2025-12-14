@@ -2,7 +2,7 @@
   <b-tabs content-class="mt-3" v-model="tab_index">
     <b-tab title="盤面" :title-link-class="linkClass(0)" class="pl-3 pr-3">
       <div v-if="ban.turn >= 18 || is_agari">
-        <h5><b>リザルト</b></h5>
+        <h5><b>結果</b></h5>
         <div style="padding: 0em 0em 1em 0em">
           <b>{{ state_info_without_config }} </b>
         </div>
@@ -322,7 +322,7 @@
             >https://pystyle.info/apps/mahjong-nanikiru-simulator/</a
           >
           を改変した、一人麻雀の練習ができるサイトです。 (
-          <a href="https://github.com/Muratam/akochandaaaaaa">GitHub</a>
+          <a href="https://github.com/blankaex/akochandaaaaaa">GitHub</a>
           )
         </li>
         <li>
@@ -1118,4 +1118,13 @@ export default {
   background-color: #22cc47;
   box-shadow: 0 4px 0 #14ba5f;
 }
+
+.text-dark, a.text-dark:focus, a.text-dark:hover {
+  color: #f8f9fa !important;
+}
+
+.progress-bar {
+  color: #f8f9fa !important;
+}
+
 </style>

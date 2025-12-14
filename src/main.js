@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.css"
+import '@forevolve/bootstrap-dark/dist/css/bootstrap-dark.min.css'
 import "bootstrap-vue/dist/bootstrap-vue.css"
 
 import { BootstrapVue, BootstrapVueIcons } from "bootstrap-vue"

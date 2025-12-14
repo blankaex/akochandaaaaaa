@@ -1,4 +1,4 @@
 module.exports = {
-  publicPath: "/akochandaaaaa/",
+  publicPath: "/",
   outputDir: "dist/"
 };
