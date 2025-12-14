@@ -36,7 +36,7 @@
         自風
         <TileImage :tile=zikaze />
       </span>
-      <b-button class="mr-2" variant="light" @click="reset_hand"
+      <b-button style="margin-left: 1em" class="mr-2" variant="light" @click="reset_hand"
         >はじめから
       </b-button>
       <b-button
