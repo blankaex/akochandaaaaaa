@@ -29,10 +29,12 @@
         <TileImage v-for="(tile, i) in dora_indicators" :key="i" :tile="tile" />
       </span>
       <span style="padding: 1.2em 0.4em 1.2em 0.4em">
-        {{ tile2String(bakaze) }}場
+        場風
+        <TileImage :tile=bakaze />
       </span>
       <span style="padding: 1.2em 0.4em 1.2em 0.4em">
-        {{ tile2String(zikaze) }}家
+        自風
+        <TileImage :tile=zikaze />
       </span>
       <b-button class="mr-2" variant="light" @click="reset_hand"
         >はじめから
@@ -44,6 +46,48 @@
         @click="back_hand"
         >一手戻す
       </b-button>
+      <div class="discards">
+          <span>
+            <TileImage
+              v-for="i in Math.min(ban.kawa_indicators.length + 1, 6)"
+              :key="i + 'warui-kawa-edayo'"
+              :tile="
+                ban.kawa_indicators.length < i ? -1 : ban.kawa_indicators[i - 1]
+              "
+              :sstyle="'width:2em; height: auto'"
+            />
+          </span>
+          <span>
+            <TileImage
+              v-for="i in Math.min(
+                Math.max(0, ban.kawa_indicators.length + 1 - 6),
+                6
+              )"
+              :key="i + 'warui-kawa-edayo2'"
+              :tile="
+                ban.kawa_indicators.length < i + 6
+                  ? -1
+                  : ban.kawa_indicators[i - 1 + 6]
+              "
+              :sstyle="'width:2em; height: auto'"
+            />
+          </span>
+          <span>
+            <TileImage
+              v-for="i in Math.min(
+                Math.max(0, ban.kawa_indicators.length + 1 - 12),
+                6
+              )"
+              :key="i + 'warui-kawa-edayo3'"
+              :tile="
+                ban.kawa_indicators.length < i + 12
+                  ? -1
+                  : ban.kawa_indicators[i - 1 + 12]
+              "
+              :sstyle="'width:2em; height: auto'"
+            />
+          </span>
+      </div>
       <b-form-group
         label-cols="0"
         content-cols="12"
@@ -59,46 +103,6 @@
           size="lg"
         />
       </b-form-group>
-      <span style="padding: 1.2em 0.4em 1.2em 0em">
-        <TileImage
-          v-for="i in Math.min(ban.kawa_indicators.length + 1, 6)"
-          :key="i + 'warui-kawa-edayo'"
-          :tile="
-            ban.kawa_indicators.length < i ? -1 : ban.kawa_indicators[i - 1]
-          "
-          :sstyle="'width:1.4em; height: auto'"
-        />
-      </span>
-      <span style="padding: 1.2em 0.4em 1.2em 0.4em">
-        <TileImage
-          v-for="i in Math.min(
-            Math.max(0, ban.kawa_indicators.length + 1 - 6),
-            6
-          )"
-          :key="i + 'warui-kawa-edayo2'"
-          :tile="
-            ban.kawa_indicators.length < i + 6
-              ? -1
-              : ban.kawa_indicators[i - 1 + 6]
-          "
-          :sstyle="'width:1.4em; height: auto'"
-        />
-      </span>
-      <span style="padding: 1.2em 0.4em 1.2em 0.4em">
-        <TileImage
-          v-for="i in Math.min(
-            Math.max(0, ban.kawa_indicators.length + 1 - 12),
-            6
-          )"
-          :key="i + 'warui-kawa-edayo3'"
-          :tile="
-            ban.kawa_indicators.length < i + 12
-              ? -1
-              : ban.kawa_indicators[i - 1 + 12]
-          "
-          :sstyle="'width:1.4em; height: auto'"
-        />
-      </span>
       <div
         class="progress"
         style="max-width: 50em; height: 2em; margin: 0.5em 1em 0.1em 0em"
@@ -456,8 +460,8 @@ export default {
       // Description
       tab_index: 0,
       // data
-      bakaze: Tile.Ton, // 場風
-      zikaze: Tile.Ton, // 自風
+      bakaze: [Tile.Ton, Tile.Nan][Math.floor(Math.random() * 2)], // 場風
+      zikaze: [Tile.Ton, Tile.Nan, Tile.Sya, Tile.Pe][Math.floor(Math.random() * 4)], // 自風
       syanten_type: SyantenType.Normal, // 手牌の種類
       flag: [1, 2, 4, 8, 16, 32], // フラグ
       maximize_target: 0,
@@ -1124,7 +1128,14 @@ export default {
 }
 
 .progress-bar {
-  color: #f8f9fa !important;
+  color: #1e1e1e !important;
 }
 
+.discards {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  height: 160px;
+  overflow: hidden;
+}
 </style>
